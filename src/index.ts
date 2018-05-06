@@ -54,10 +54,7 @@ export const beautifier: Beautifier = {
       writeFile(filePath, text).then(() =>
         yapf
           .run({
-            args: relativizePaths(
-              ["--in-place", filePath],
-              basePath
-            ),
+            args: relativizePaths(["--in-place", filePath], basePath),
             options: {
               cwd: basePath,
             },
