@@ -2,8 +2,6 @@ env:
   global:
     - CC_TEST_REPORTER_ID=23e59016c49019de978d1a6cc52bf219c29ef17497c3fd9b052ab4c05713aab2
 language: node_js
-python:
-  - "3.6"
 node_js:
   - "8"
   - "6"
@@ -15,10 +13,10 @@ cache:
   - node_modules # NPM packages
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      pip install yapf;
+      pip install yapf[secure];
       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      pip install yapf;
+      pip2 install yapf[secure];
       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter;
     else
       echo Error:TRAVIS_OS_NAME && exit 1;
