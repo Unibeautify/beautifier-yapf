@@ -50,11 +50,17 @@ export const beautifier: Beautifier = {
   }: BeautifierBeautifyData) {
     const yapf = dependencies.get<ExecutableDependency>("yapf");
     const basePath: string = os.tmpdir();
+    const config =
+      beautifierConfig && beautifierConfig.filePath
+        ? `--style=${beautifierConfig.filePath}`
+        : "";
+    // tslint:disable-next-line no-console
+    console.log(`Using config: ${config}`);
     return tmpFile({ postfix: ".py" }).then(filePath =>
       writeFile(filePath, text).then(() =>
         yapf
           .run({
-            args: relativizePaths(["--in-place", filePath], basePath),
+            args: relativizePaths(["--in-place", filePath, config], basePath),
             options: {
               cwd: basePath,
             },
