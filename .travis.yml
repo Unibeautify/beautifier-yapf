@@ -13,7 +13,7 @@ cache:
   - node_modules # NPM packages
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      pip install urllib3[secure];
+      pip install 'requests[security]';
       pip install yapf;
       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
