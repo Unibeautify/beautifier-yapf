@@ -13,10 +13,10 @@ cache:
   - node_modules # NPM packages
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      pip install yapf[secure];
+      pip2 install yapf;
       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      pip2 install yapf[secure];
+      pip2 install yapf;
       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter;
     else
       echo Error:TRAVIS_OS_NAME && exit 1;
