@@ -27,7 +27,6 @@ export const beautifier: Beautifier = {
       parseVersion: [/yapf (\d+\.\d+\.\d+)/],
     },
   ],
-  // TODO
   resolveConfig: ({ filePath, projectPath }) => {
     const configFiles: string[] = [".style.yapf", "setup.cfg"];
     return findFile({
