@@ -6,7 +6,7 @@ import { raw } from "../utils";
 jest.mock("tmp", () => ({
   file(options: any, callback: any) {
     return callback(new Error("Create file failed"));
-  }
+  },
 }));
 // tslint:disable:mocha-no-side-effect-code
 test(`should error creating tmp file`, () => {
@@ -16,8 +16,7 @@ test(`should error creating tmp file`, () => {
   const unibeautify = newUnibeautify();
   unibeautify.loadBeautifier(beautifier);
   return expect(
-    unibeautify
-    .beautify({
+    unibeautify.beautify({
       languageName: "Python",
       options: {
         Python: {},
