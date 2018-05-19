@@ -1,18 +1,11 @@
-import * as fs from "fs";
-import * as path from "path";
 import { newUnibeautify, Beautifier } from "unibeautify";
 import beautifier from "../../src";
 import { raw } from "../utils";
-jest.mock("tmp", () => ({
-  file(options: any, callback: any) {
-    return callback(new Error("Create file failed"));
-  }
-}));
 // tslint:disable:mocha-no-side-effect-code
-test(`should error creating tmp file`, () => {
-  const text: string = fs
-    .readFileSync(path.resolve(__dirname, `../fixtures/test1.py`))
-    .toString();
+const fs = require("fs");
+fs.writeFile = jest.fn((filepath, content, cb) => cb(new Error("Write file failed")));
+test(`should error writing file`, () => {
+  const text: string = `x = {'a':37,'b':42,'c':927}`;
   const unibeautify = newUnibeautify();
   unibeautify.loadBeautifier(beautifier);
   return expect(
@@ -24,5 +17,5 @@ test(`should error creating tmp file`, () => {
       },
       text,
     })
-  ).rejects.toThrowError("Create file failed");
+  ).rejects.toThrowError("Write file failed");
 });
