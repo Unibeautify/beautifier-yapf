@@ -9,8 +9,8 @@ jest.mock("fs", () => {
   );
   return {
     ...fs,
-    readFile
-   };
+    readFile,
+  };
 });
 test(`should error reading file`, () => {
   const text: string = `x = {'a':37,'b':42,'c':927}`;
