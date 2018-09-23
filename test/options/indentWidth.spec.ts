@@ -1,18 +1,11 @@
 import { newUnibeautify, Beautifier } from "unibeautify";
 import beautifier from "@src";
 
-// import * as fs from "fs";
-// import * as path from "path";
-
-// const text: string = fs
-// .readFileSync(path.resolve(__dirname, `../fixtures/test1.py`))
-// .toString();
-
-// testWithTabWidth(0, true);
+testWithTabWidth(0, true);
 testWithTabWidth(1, true);
 testWithTabWidth(2, true);
 
-// testWithTabWidth(0, false);
+testWithTabWidth(0, false);
 testWithTabWidth(2, false);
 testWithTabWidth(4, false);
 
