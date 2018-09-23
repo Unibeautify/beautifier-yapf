@@ -18,7 +18,7 @@ import { raw } from "@test/utils";
       languageName: "Python",
       options: {
         Python: {
-          yapf: {
+          YAPF: {
             prefer_beautifier_config: true
           }
         } as any,

@@ -14,7 +14,7 @@ import * as os from "os";
 const { pkg } = readPkgUp.sync({ cwd: __dirname });
 
 export const beautifier: Beautifier = {
-  name: "yapf",
+  name: "YAPF",
   package: pkg,
   options: {
     Python: {
@@ -25,7 +25,7 @@ export const beautifier: Beautifier = {
   dependencies: [
     {
       type: DependencyType.Executable,
-      name: "yapf",
+      name: "YAPF",
       program: "yapf",
       parseVersion: [/yapf (\d+\.\d+\.\d+)/],
     },
@@ -50,14 +50,12 @@ export const beautifier: Beautifier = {
     options,
     beautifierConfig,
   }: BeautifierBeautifyData) {
-    const yapf = dependencies.get<ExecutableDependency>("yapf");
+    const yapf = dependencies.get<ExecutableDependency>("YAPF");
     const style =
       beautifierConfig && beautifierConfig.filePath
         ? `${beautifierConfig.filePath}`
         : stringifyOptions(options);
     const config = style ? `--style=${style}` : "";
-    // tslint:disable-next-line no-console
-    console.log(`Using config: ${config}`);
     return tmpFile({ postfix: ".py" }).then(filePath => {
       const basePath: string = os.tmpdir();
       const args = relativizePaths([config, "--in-place", filePath], basePath);

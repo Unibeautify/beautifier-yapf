@@ -18,7 +18,7 @@ test(`should successfully beautify file with config one directory up`, () => {
       languageName: "Python",
       options: {
         Python: {
-          yapf: {
+          YAPF: {
             prefer_beautifier_config: true
           }
         } as any,

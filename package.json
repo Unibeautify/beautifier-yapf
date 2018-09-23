@@ -1,7 +1,7 @@
 {
   "name": "@unibeautify/beautifier-yapf",
   "version": "0.2.0",
-  "description": "yapf beautifier for Unibeautify",
+  "description": "YAPF beautifier for Unibeautify",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
   "scripts": {
