@@ -17,7 +17,10 @@ export const beautifier: Beautifier = {
   name: "yapf",
   package: pkg,
   options: {
-    Python: true,
+    Python: {
+      indent_width: "indent_size",
+      use_tabs: [["indent_style"], options => options.indent_style === "tab"],
+    },
   },
   dependencies: [
     {
@@ -44,22 +47,24 @@ export const beautifier: Beautifier = {
   beautify({
     text,
     dependencies,
-    filePath,
+    options,
     beautifierConfig,
   }: BeautifierBeautifyData) {
     const yapf = dependencies.get<ExecutableDependency>("yapf");
-    const basePath: string = os.tmpdir();
-    const config =
+    const style =
       beautifierConfig && beautifierConfig.filePath
-        ? `--style=${beautifierConfig.filePath}`
-        : "";
+        ? `${beautifierConfig.filePath}`
+        : stringifyOptions(options);
+    const config = style ? `--style=${style}` : "";
     // tslint:disable-next-line no-console
     console.log(`Using config: ${config}`);
-    return tmpFile({ postfix: ".py" }).then(filePath =>
-      writeFile(filePath, text).then(() =>
+    return tmpFile({ postfix: ".py" }).then(filePath => {
+      const basePath: string = os.tmpdir();
+      const args = relativizePaths([config, "--in-place", filePath], basePath);
+      return writeFile(filePath, text).then(() =>
         yapf
           .run({
-            args: relativizePaths(["--in-place", filePath, config], basePath),
+            args,
             options: {
               cwd: basePath,
             },
@@ -70,8 +75,8 @@ export const beautifier: Beautifier = {
             }
             return readFile(filePath);
           })
-      )
-    );
+      );
+    });
   },
 };
 
@@ -156,6 +161,24 @@ function relativizePaths(args: string[], basePath: string): string[] {
     }
     return arg;
   });
+}
+
+function stringifyOptions(
+  options: BeautifierBeautifyData["options"]
+): string | undefined {
+  const ops: string[] = Object.keys(options)
+    .map(optionKey => {
+      const value = options[optionKey];
+      if (value === undefined) {
+        return;
+      }
+      return `${optionKey}: ${value}`;
+    })
+    .filter(Boolean) as any;
+  if (ops.length > 0) {
+    return `{${ops.join(", ")}}`;
+  }
+  return undefined;
 }
 
 export default beautifier;
