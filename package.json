@@ -32,7 +32,7 @@
     "unibeautify": ">= 0.13.0"
   },
   "devDependencies": {
-    "@types/jest": "24.0.22",
+    "@types/jest": "24.0.23",
     "@types/node": "12.12.7",
     "@types/tmp": "0.1.0",
     "jest": "24.9.0",
