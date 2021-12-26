@@ -354,10 +354,10 @@
   dependencies:
     jest-diff "^24.3.0"
 
-"@types/node@12.20.38":
-  version "12.20.38"
-  resolved "https://registry.npmjs.org/@types/node/-/node-12.20.38.tgz"
-  integrity sha512-NxmtBRGipjx1B225OeMdI+CQmLbYqvvmYbukDTJGDgzIDgPQ1EcjGmYxGhOk5hTBqeB558S6RgHSpq2iiqifAQ==
+"@types/node@12.20.39":
+  version "12.20.39"
+  resolved "https://registry.npmjs.org/@types/node/-/node-12.20.39.tgz"
+  integrity sha512-U7PMwkDmc3bnL0e4U8oA0POpi1vfsYDc+DEUS2+rPxm9NlLcW1dBa5JcRhO633PoPUcCSWMNXrMsqhmAVEo+IQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
